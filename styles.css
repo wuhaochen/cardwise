@@ -26,3 +26,13 @@
  .select-editable select:focus, .select-editable input:focus {
      outline:none;
 }
+
+.fake-link {
+     cursor:pointer;
+     color:blue;
+     text-decoration:underline;
+}
+ .fake-link hover {
+     text-decoration:none;
+     text-shadow: 1px 1px 1px #555;
+}

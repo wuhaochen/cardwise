@@ -2,6 +2,7 @@ var data = null;
 
 
 function onLoad() {
+    console.log('load');
     setDefaultDate();
     $.getJSON("current.json", onDataReceived);
 }
@@ -19,16 +20,46 @@ function onDataReceived(result) {
 
 
 function setDefaultDate() {
-    document.getElementById('start').value = new Date().toJSON().slice(0,10);
-    document.getElementById('end').value = findNextQuaterEnd().toJSON().slice(0,10);
+    setStartNextQuarter();
+    setEndNextQuarter();
+}
+
+
+function findNextQuaterStart(d) {
+    d = d || new Date();
+    month = d.getMonth();
+    qendmonth = month + 3 - month % 3;
+    nd = new Date(d);
+    nd.setMonth(qendmonth);
+    nd.setDate(1);
+    return nd;
 }
 
 
 function findNextQuaterEnd(d) {
-    d = d || new Date();
-    month = d.getMonth();
-    qendmonth = month + 6 - month % 3;
-    d.setMonth(qendmonth);
-    d.setDate(1);
-    return d;
+    nd = findNextQuaterStart(d);
+    nd.setMonth(nd.getMonth() + 3);
+    return nd;
+}
+
+
+function setStartToday() {
+    document.getElementById('start').value = new Date().toJSON().slice(0,10);
+}
+
+
+function setStartNextQuarter() {
+    d = findNextQuaterStart();
+    document.getElementById('start').value = d.toJSON().slice(0,10);
+}
+
+
+function setEndForever() {
+    document.getElementById('end').value = '9999-12-31';
+}
+
+
+function setEndNextQuarter() {
+    d = findNextQuaterEnd();
+    document.getElementById('end').value = d.toJSON().slice(0,10);
 }
