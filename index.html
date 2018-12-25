@@ -3,6 +3,7 @@
 <head>
   <link rel="stylesheet" href="styles.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="cardwiseutils.js"></script>
   <script src="cardwise.js"></script>
 </head>
 <body onload="onLoad()">
@@ -11,7 +12,7 @@
     <select onchange="this.nextElementSibling.value=this.value; updateResult(this.value)">
       <option value=""></option>
     </select>
-      <input type="text" name="format" value="" onchange="this.previousElementSibling.value=-1; updateResult(this.value)"/>
+      <input type="text" name="category" value="" onchange="this.previousElementSibling.value=-1; updateResult(this.value)"/>
   </div>
 
   <br>
@@ -23,6 +24,9 @@
       <td>Category</td>
     </tr>
   </table>
+
+  <br>
+  <a href="adddeal.html">Add new deals</a>
 
 </body>
 </html>

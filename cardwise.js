@@ -1,20 +1,16 @@
-var CARD_INDEX = 0;
-var CATEGORY_INDEX = 1;
-var CASHBACK_INDEX = 4;
-
 var data = null;
 
 
-function updateSelector(result) {
+function onLoad() {
+    $.getJSON("current.json", onDataReceived);
+}
+
+
+function onDataReceived(result) {
     data = result;
     var categories = getUniqueKey(data, CATEGORY_INDEX);
     var selector = document.getElementById("category-selector");
-    for (let category of categories) {
-        var option = document.createElement("option");
-        option.value = category;
-        option.text = category;
-        selector.children[0].add(option);
-    }
+    updateSelector(selector, categories);
 }
 
 
@@ -43,20 +39,6 @@ function findBestDeals(data, category) {
     }
     deal_list.sort().reverse()
     return deal_list
-}
-
-
-function getUniqueKey(data, index) {
-    var keys = new Set();
-    for (let entry of data) {
-        keys.add(entry[index]);
-    }
-    return keys;
-}
-
-
-function onLoad() {
-    $.getJSON("current.json", updateSelector);
 }
 
 
