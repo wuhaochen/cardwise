@@ -1,6 +1,6 @@
 <?php
 function get_data($conn) {
-  $sql = "SELECT * FROM cashback;";
+  $sql = "SELECT * FROM cashback WHERE NOW()>startdate and NOW()<enddate;";
   $result = $conn->query($sql)->fetchAll(PDO::FETCH_NUM);
   return $result;
 }

@@ -7,7 +7,7 @@ var data = null;
 
 function updateSelector(result) {
     data = result;
-    var categories = getUniqueKey(data, CATEGORY_INDEX);    
+    var categories = getUniqueKey(data, CATEGORY_INDEX);
     var selector = document.getElementById("category-selector");
     for (let category of categories) {
         var option = document.createElement("option");
