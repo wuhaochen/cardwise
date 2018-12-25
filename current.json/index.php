@@ -6,8 +6,8 @@ function get_data($conn) {
 }
 
 $servername = "localhost";
-$username = "phpquery";
-$password = "php";
+$username = $_ENV["PHPMYSQLUSER"];
+$password = $_ENV["PHPMYSQLPWD"];
 
 try {
   $conn = new PDO("mysql:host=$servername;dbname=cardwise", $username, $password);
