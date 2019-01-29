@@ -11,13 +11,15 @@ read cuser
 echo "Enter password for cardwise:"
 read cpwd
 
-COMMAND_S="set @username:='"$cuser"';set @password:='"$cpwd"';source grant.sql;"
+CREATE="GRANT USAGE ON *.* TO '"$cuser"'@'localhost' IDENTIFIED BY '"$cpwd"';"
+GRANT="GRANT SELECT, INSERT on cardwise.cashback TO '"$cuser"'@'localhost';"
 
-mysql -uroot -p$password -e "$COMMAND_S"
+mysql -uroot -p$password -e "$CREATE"
+mysql -uroot -p$password -e "$GRANT"
 
 users='SetEnv PHPMYSQLUSER "'$cuser'"'
 pwds='SetEnv PHPMYSQLPWD "'$cpwd'"'
 
 echo "" >> ../.htaccess
 echo $users >> ../.htaccess
-echo $passs >> ../.htaccess
+echo $pwds >> ../.htaccess
