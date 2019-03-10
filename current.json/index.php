@@ -21,4 +21,3 @@ catch(PDOException $e){
 $data = get_data($conn);
 echo json_encode($data);
 ?>
-
