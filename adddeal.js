@@ -1,6 +1,13 @@
 var data = null;
 
 
+Date.prototype.toSQLDateStr = function() {
+    var utcdate = new Date(this);
+    utcdate.setMinutes(utcdate.getMinutes() - utcdate.getTimezoneOffset())
+    return utcdate.toJSON().slice(0,10);
+}
+
+
 function onLoad() {
     console.log('load');
     setDefaultDate();
@@ -44,13 +51,13 @@ function findNextQuaterEnd(d) {
 
 
 function setStartToday() {
-    document.getElementById('start').value = new Date().toJSON().slice(0,10);
+    document.getElementById('start').value = new Date().toSQLDateStr();
 }
 
 
 function setStartNextQuarter() {
     d = findNextQuaterStart();
-    document.getElementById('start').value = d.toJSON().slice(0,10);
+    document.getElementById('start').value = d.toSQLDateStr();
 }
 
 
@@ -61,5 +68,5 @@ function setEndForever() {
 
 function setEndNextQuarter() {
     d = findNextQuaterEnd();
-    document.getElementById('end').value = d.toJSON().slice(0,10);
+    document.getElementById('end').value = d.toSQLDateStr();
 }
